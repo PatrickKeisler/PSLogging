@@ -76,7 +76,7 @@ Function Start-Log {
     [Parameter(Mandatory=$true,Position=0)][string]$LogPath,
     [Parameter(Mandatory=$true,Position=1)][string]$LogName,
     [Parameter(Mandatory=$true,Position=2)][string]$ScriptVersion,
-    [Parameter(Mandatory=$false,Position=3)][switch]$ToScreen
+    [Parameter(Mandatory=$false,Position=3)][bool]$ToScreen=$True
   )
 
   Process {
@@ -94,20 +94,20 @@ Function Start-Log {
     Add-Content -Path $sFullPath -Value "Started processing at [$([DateTime]::Now)]."
     Add-Content -Path $sFullPath -Value "***************************************************************************************************"
     Add-Content -Path $sFullPath -Value ""
-    Add-Content -Path $sFullPath -Value "Running script version [$ScriptVersion]."
-    Add-Content -Path $sFullPath -Value ""
-    Add-Content -Path $sFullPath -Value "***************************************************************************************************"
-    Add-Content -Path $sFullPath -Value ""
+    #Add-Content -Path $sFullPath -Value "Running script version [$ScriptVersion]."
+    #Add-Content -Path $sFullPath -Value ""
+    #Add-Content -Path $sFullPath -Value "***************************************************************************************************"
+    #Add-Content -Path $sFullPath -Value ""
 
     #Write to screen for debug mode
     Write-Debug "***************************************************************************************************"
     Write-Debug "Started processing at [$([DateTime]::Now)]."
     Write-Debug "***************************************************************************************************"
     Write-Debug ""
-    Write-Debug "Running script version [$ScriptVersion]."
-    Write-Debug ""
-    Write-Debug "***************************************************************************************************"
-    Write-Debug ""
+    #Write-Debug "Running script version [$ScriptVersion]."
+    #Write-Debug ""
+    #Write-Debug "***************************************************************************************************"
+    #Write-Debug ""
 
     #Write to scren for ToScreen mode
     If ( $ToScreen -eq $True ) {
@@ -115,10 +115,10 @@ Function Start-Log {
       Write-Output "Started processing at [$([DateTime]::Now)]."
       Write-Output "***************************************************************************************************"
       Write-Output ""
-      Write-Output "Running script version [$ScriptVersion]."
-      Write-Output ""
-      Write-Output "***************************************************************************************************"
-      Write-Output ""
+      #Write-Output "Running script version [$ScriptVersion]."
+      #Write-Output ""
+      #Write-Output "***************************************************************************************************"
+      #Write-Output ""
     }
   }
 }
@@ -197,7 +197,7 @@ Function Write-LogInfo {
     [Parameter(Mandatory=$true,Position=0)][string]$LogPath,
     [Parameter(Mandatory=$true,Position=1,ValueFromPipeline=$true)][string]$Message,
     [Parameter(Mandatory=$false,Position=2)][switch]$TimeStamp,
-    [Parameter(Mandatory=$false,Position=3)][switch]$ToScreen
+    [Parameter(Mandatory=$false,Position=3)][bool]$ToScreen=$True
   )
 
   Process {
@@ -278,7 +278,7 @@ Function Write-LogWarning {
     [Parameter(Mandatory=$true,Position=0)][string]$LogPath,
     [Parameter(Mandatory=$true,Position=1,ValueFromPipeline=$true)][string]$Message,
     [Parameter(Mandatory=$false,Position=2)][switch]$TimeStamp,
-    [Parameter(Mandatory=$false,Position=3)][switch]$ToScreen
+    [Parameter(Mandatory=$false,Position=3)][bool]$ToScreen=$True
   )
 
   Process {
@@ -398,7 +398,7 @@ Function Write-LogError {
     [Parameter(Mandatory=$true,Position=1,ValueFromPipeline=$true)][string]$Message,
     [Parameter(Mandatory=$false,Position=3)][switch]$TimeStamp,
     [Parameter(Mandatory=$false,Position=4)][switch]$ExitGracefully,
-    [Parameter(Mandatory=$false,Position=5)][switch]$ToScreen
+    [Parameter(Mandatory=$false,Position=5)][bool]$ToScreen=$True
   )
 
   Process {
@@ -505,7 +505,7 @@ Function Stop-Log {
   Param (
     [Parameter(Mandatory=$true,Position=0)][string]$LogPath,
     [Parameter(Mandatory=$false,Position=1)][switch]$NoExit,
-    [Parameter(Mandatory=$false,Position=2)][switch]$ToScreen
+    [Parameter(Mandatory=$false,Position=2)][bool]$ToScreen=$True
   )
 
   Process {
